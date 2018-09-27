@@ -12,6 +12,7 @@ export const AUTH_TOKEN_NAME = 'id_token';
 export class LocalStorage {
   storageBackend: StorageBackend;
 
+  //Added comment for get item as well
   getItem(key): any {
     if (this.storageBackend) {
       return this.storageBackend.getItem(key);
