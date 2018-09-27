@@ -39,7 +39,7 @@ export class LoginService {
       });
     });
   }
-
+// Added comment for Load users
   public loadUser(token: string): User {
     const userToken = this.jwtHelper.decodeToken(token);
 
