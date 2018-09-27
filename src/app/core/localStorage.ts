@@ -29,6 +29,7 @@ export class LocalStorage {
     }
   }
 
+  //added comments for remove item
   removeItem(key): any {
     if (this.storageBackend) {
       return this.storageBackend.removeItem(key);
