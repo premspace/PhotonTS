@@ -1,0 +1,42 @@
+<div class="main-container">
+  <div class="nav-toolbar">
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()" *ngIf="user.authenticated">
+      <mat-icon>menu</mat-icon>
+    </button>
+    Angular Timesheets
+    <span class="nav-fill-remaining"></span>
+    <ng-container *ngIf="user.authenticated">
+      <span>{{user?.name.first}} {{user?.name.last}}</span>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+  </mat-toolbar>
+</div>
+<mat-sidenav-container class="side-nav-container">
+<mat-sidenav #sidenav class="side-nav-content" mode="side">
+  <ul class="side-nav-items">
+    <li class="side-nav-item">
+      <a routerLink="/projects">Projects</a>
+    </li>
+    <li class="side-nav-item">
+      <a routerLink="/timesheets">Timesheets</a>
+    </li>
+    <li class="side-nav-item">
+      <a routerLink="/employees">Employees</a>
+    </li>
+  </ul>
+</mat-sidenav>
+
+<div class="example-sidenav-content">
+  <router-outlet></router-outlet>
+</div>
+</mat-sidenav-container>
+</div>

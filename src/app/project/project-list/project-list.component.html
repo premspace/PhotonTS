@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-list>
+    <h3 mat-subheader>Projects</h3>
+    <div class="add-item-control">
+      <a mat-fab  routerLink="/projects/new" class="add-project-btn">
+        <mat-icon>add</mat-icon>
+      </a>
+    </div>
+    <mat-list-item *ngIf="projects.length === 0">
+      <p mat-line class="empty-list-message">You don't have any projects yet!</p>
+    </mat-list-item>
+    <mat-list-item class="project" *ngFor="let project of projects">
+      <mat-icon mat-list-icon>business</mat-icon>
+      <h4 mat-line class="project-list-item-name">{{project.name}}</h4>
+      <p mat-line class="project-list-item-description">{{project.description}}</p>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

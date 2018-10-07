@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import {
   AUTH_TOKEN_NAME,
@@ -15,12 +15,13 @@ import {
 
 import { ExtHttp } from './extHttp.service';
 
-import { JwtHelper } from 'angular2-jwt';
+//import { JwtHelper } from 'angular2-jwt';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable()
 export class LoginService {
 
-  jwtHelper: JwtHelper = new JwtHelper();
+  jwtHelper: JwtHelperService = new JwtHelperService();
 
   constructor(private http: ExtHttp, private identityService: IdentityService, private storage: LocalStorage) {
   }
@@ -33,17 +34,19 @@ export class LoginService {
         password: command.password
       };
 
-      this.http.post('/auth/login', body).subscribe((response) => {
+      this.http.post('/api/user', body).subscribe((response) => {
+        debugger;
         const token = response.json();
         observer.next(this.loadUser(token));
       });
     });
   }
 // Added comment for Load users
-  public loadUser(token: string): User {
-    const userToken = this.jwtHelper.decodeToken(token);
-
-    const name = new Name(userToken.firstName, userToken.lastName);
+  public loadUser(token: any): User {
+    //const userToken = this.jwtHelper.decodeToken(token);
+    const userToken = token;
+    debugger;
+    const name = new Name(userToken.firstname, userToken.lastname);
     const user = new User({name: name, authenticated: true, token: token, id: userToken._id});
 
     this.storage.setItem(AUTH_TOKEN_NAME, token);
